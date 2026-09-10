@@ -15,6 +15,7 @@ import { StudentManager } from "./components/StudentManager";
 import { TeamManager } from "./components/TeamManager";
 import { PrintSheetModal } from "./components/PrintSheetModal";
 import { BackupModal } from "./components/BackupModal";
+import { WelcomeSplashScreen } from "./components/WelcomeSplashScreen";
 import {
   Sparkles,
   ShieldCheck,
@@ -36,6 +37,9 @@ export default function App() {
   // Modals & Navigation triggers
   const [selectedForPrint, setSelectedForPrint] = useState<ActivityAdaptation | null>(null);
   const [isBackupOpen, setIsBackupOpen] = useState(false);
+  const [isWelcomeOpen, setIsWelcomeOpen] = useState<boolean>(() => {
+    return localStorage.getItem("neuroeduca_skip_splash") !== "true";
+  });
   const [adapterInitialActivity, setAdapterInitialActivity] = useState<ActivityOriginal | null>(null);
   const [adapterInitialStudent, setAdapterInitialStudent] = useState<Student | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -117,6 +121,7 @@ export default function App() {
         users={users}
         onSwitchUser={handleSwitchUser}
         onOpenBackup={() => setIsBackupOpen(true)}
+        onOpenWelcome={() => setIsWelcomeOpen(true)}
       />
 
       {/* Main Container */}
@@ -188,6 +193,13 @@ export default function App() {
           </div>
           <div className="flex items-center gap-4 text-purple-800 font-semibold text-[11px]">
             <button
+              onClick={() => setIsWelcomeOpen(true)}
+              className="hover:text-purple-950 transition-colors cursor-pointer flex items-center gap-1"
+            >
+              <span>✨ Tela de Abertura</span>
+            </button>
+            <span>•</span>
+            <button
               onClick={() => setIsBackupOpen(true)}
               className="hover:text-purple-950 transition-colors cursor-pointer"
             >
@@ -203,6 +215,13 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Animated & Colorful Welcome Splash Screen */}
+      <WelcomeSplashScreen
+        isOpen={isWelcomeOpen}
+        onClose={() => setIsWelcomeOpen(false)}
+        onExploreModule={(tabId) => setActiveTab(tabId)}
+      />
 
       {/* Print Sheet Modal */}
       {selectedForPrint && (

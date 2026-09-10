@@ -20,6 +20,7 @@ interface NavbarProps {
   users: PedagogicalUser[];
   onSwitchUser: (user: PedagogicalUser) => void;
   onOpenBackup: () => void;
+  onOpenWelcome: () => void;
 }
 
 const ROLE_LABELS: Record<UserRole, { label: string; badgeColor: string }> = {
@@ -36,7 +37,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   currentUser,
   users,
   onSwitchUser,
-  onOpenBackup
+  onOpenBackup,
+  onOpenWelcome
 }) => {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
 
@@ -63,8 +65,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             Ambiente Pedagógico Inclusivo • Banco Local no Navegador (Privacidade LGPD & Suporte Offline)
           </span>
         </div>
-        <div className="flex items-center gap-4 text-purple-300">
-          <span className="hidden sm:inline">Prevenção Ativa ao Bullying em Crianças Neurodivergentes</span>
+        <div className="flex items-center gap-3 text-purple-300">
+          <button
+            onClick={onOpenWelcome}
+            className="flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-gradient-to-r from-fuchsia-600 via-purple-600 to-indigo-600 text-white hover:brightness-110 transition-all font-bold text-[11px] shadow-xs cursor-pointer"
+            title="Abrir a tela de abertura colorida e animada"
+          >
+            <Sparkles className="w-3 h-3 text-amber-300 animate-spin" style={{ animationDuration: "8s" }} />
+            <span>✨ Tela de Abertura</span>
+          </button>
+          <span className="hidden md:inline text-purple-400">•</span>
           <button
             onClick={onOpenBackup}
             className="flex items-center gap-1.5 text-purple-300 hover:text-white transition-colors font-medium cursor-pointer"
