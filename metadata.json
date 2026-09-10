@@ -1,0 +1,6 @@
+{
+  "name": "NeuroEduca - Adaptação Pedagógica & Anti-Bullying",
+  "description": "Plataforma de pedagogia inclusiva para adaptação de atividades com foco em prevenção do bullying, suporte neurodivergente personalizado, diretrizes visuais e sensoriais, banco de dados local offline e monitoramento de progresso.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
